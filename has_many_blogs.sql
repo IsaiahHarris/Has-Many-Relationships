@@ -25,5 +25,15 @@ CREATE TABLE posts(
   content text NULL DEFAULT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   updated_at timestamp with time zone NOT NULL DEFAULT now(),
-  poster_id serial NOT NULL REFERENCES
+  poster_id serial NOT NULL REFERENCES users(id)
+  
+)
+
+CREATE TABLE comments(
+  id serial NOT NULL PRIMARY KEY,
+  body varchar(510) NULL DEFAULT NULL,
+  created_at timestamp with time zone,
+  updated_at timestamp with time zone,
+  commenter_id serial REFERENCES users(id),
+  post_id serial REFERENCES posts(id)
 )
