@@ -27,7 +27,7 @@ CREATE TABLE posts(
   updated_at timestamp with time zone NOT NULL DEFAULT now(),
   poster_id serial NOT NULL REFERENCES users(id)
   
-)
+);
 
 CREATE TABLE comments(
   id serial NOT NULL PRIMARY KEY,
