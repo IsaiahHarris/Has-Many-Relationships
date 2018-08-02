@@ -40,5 +40,17 @@ FROM posts JOIN users ON (posts.poster_id = users.id) JOIN comments ON (comments
 WHERE comments.body LIKE '%MATRIX%';
 
 SELECT users.first_name, users.last_name, comments.body AS "comment_body"
-FROM users JOIN comments ON (comments.commenter_id = users.id) JOIN posts ON (comments.post_id= posts.id)
+FROM users JOIN comments ON (comments.commenter_id = users.id) JOIN posts ON (comments.post_id = posts.id)
 WHERE posts.content LIKE '%dolorum%' AND comments.body LIKE '%SSL%';
+
+SELECT users.first_name AS "post_author_first_name", users.last_name AS "post_author_last_name", posts.title AS "post_title", users.username AS "comment_author_username", comments.body AS "comment_body"
+FROM users JOIN comments ON (comments.commenter_id = users.id) JOIN posts ON (comments.post_id = posts.id)
+WHERE (comments.body LIKE '%SSL%' OR comments.body LIKE '%firewall%') AND posts.content LIKE '%nemo%';
+
+SELECT COUNT (*)
+FROM comments JOIN posts ON (comments.post_id = posts.poster_id)
+WHERE posts.created_at > '2015-07-14 00:00:00-10';
+
+SELECT COUNT (*)
+FROM users JOIN comments On (comments.commenter_id = users.id)
+WHERE comments.body LIKE '%programming%';
