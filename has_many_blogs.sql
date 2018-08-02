@@ -4,10 +4,11 @@ DROP DATABASE IF EXISTS has_many_blogs;
 CREATE USER has_many_user WITH ENCRYPTED PASSWORD 'password';
 CREATE DATABASE has_many_blogs WITH OWNER has_many_user;
 
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS posts;
-DROP TABLE IF EXISTS comments;
 \c has_many_blogs;
+
+DROP TABLE IF EXISTS comments;
+DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
   id serial NOT NULL PRIMARY KEY,
@@ -25,7 +26,7 @@ CREATE TABLE posts(
   content text NULL DEFAULT NULL,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   updated_at timestamp with time zone NOT NULL DEFAULT now(),
-  poster_id serial NOT NULL REFERENCES users(id)
+  poster_id integer NOT NULL REFERENCES users(id)
 );
 
 CREATE TABLE comments(
@@ -33,7 +34,7 @@ CREATE TABLE comments(
   body varchar(510) NULL DEFAULT NULL,
   created_at timestamp with time zone,
   updated_at timestamp with time zone,
-  post_id serial REFERENCES posts(id),
-  commenter_id serial REFERENCES users(id)
+  post_id integer NOT NULL REFERENCES posts(id),
+  commenter_id integer NOT NULL REFERENCES users(id)
 );
 \i joins.sql
